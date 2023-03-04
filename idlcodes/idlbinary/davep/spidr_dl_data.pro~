@@ -1,4 +1,0 @@
-if n_elements(startdate) eq 0 then startdate = ' '
-if n_elements(enddate) eq 0 then enddate = ' '
-startdate = ask('start date: ',startdate)
-enddate = ask('end date: ',enddate)

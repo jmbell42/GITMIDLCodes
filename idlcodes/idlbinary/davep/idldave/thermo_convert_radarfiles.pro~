@@ -1,9 +1,0 @@
-if (n_elements(year) eq 0) then year = '2000'
-year = ask('year',year)
-
-if (n_elements(month) eq 0) then month = '10'
-month = string(fix(ask('month',month)), format='(I02)')
-
-if (n_elements(day) eq 0) then day = '29'
-day = string(fix(ask('day',day)), format='(I02)')
-
