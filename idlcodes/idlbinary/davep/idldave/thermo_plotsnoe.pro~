@@ -1,0 +1,51 @@
+if (n_elements(GitmDensity) gt 0) then begin
+    answer = ask('whether to re-read data','n')
+    if (strpos(mklower(answer),'n') gt -1) then reread = 0
+endif
+
+if (reread) then begin
+
+    if (n_elements(dir) eq 0) then dir = '.'
+    dir = ask('gitm directory',dir)
+    filelist = file_search(dir+'/snoe*.bin')
+
+    file = filelist(0)
+    length = strpos(file,'.bin')
+    ls = length-13
+    
+    yr = strmid(file,ls,2)
+    iYear = tostr(2000+fix(yr))
+    iMonth = strmid(file,ls+2,2)
+    iDay = strmid(file,ls+4,2)
+    
+    snoedir = '/data6/Data/SNOE/'+tostr(iyear)+'/'
+    doy = jday(fix(iyear), fix(imonth), fix(iday))
+    ndays = 1
+
+    thermo_readsat, filelist, data, time, nTimes, Vars, nAlts, nSats, nTimes
+
+    itimearray = intarr(6,ntimes)
+    GitmAlts = reform(data(0,0,2,*))/1000.0
+    GitmNO  = reform(data(0,*,8,*))
+    GitmLons = reform(data(0,*,0,*))*180.0/!pi
+    GitmLats = reform(data(0,*,1,*))*180.0/!pi
+
+    c_r_to_a, itime, time(0)
+    itime(3:5) = 0
+    ndays = round((time(ntimes-1)-time(0))/3600. /24.)
+
+    c_a_to_r, itime, basetime
+    hour = (time/3600.0 mod 24.0) + fix((time-basetime)/(24.0*3600.0))*24.0
+    localtime = (reform(GitmLons(*,0))/15.0 + hour) mod 24.0
+
+    
+    
+
+
+end if
+
+
+
+
+
+end

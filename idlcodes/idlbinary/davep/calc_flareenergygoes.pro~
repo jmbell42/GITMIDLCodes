@@ -1,0 +1,68 @@
+;if n_elements(date) eq 0 then date = ''
+;date = ask('date (yyyy-mm-dd): ',date)
+;if n_elements(flaretime) eq 0 then flaretime = ''
+;flaretime = ask('approx start of flare (hh-mm): ',flaretime)
+
+PRO calc_flareenergy, genergy,date, flaretime
+
+iyear = fix(strmid(date,0,4))
+imonth = fix(strmid(date,5,2))
+iday = fix(strmid(date,8,2))
+flarestime = [iyear,imonth,iday,fix(strmid(flaretime,0,2)),fix(strmid(flaretime,2,2)),0]
+flareetime = [iyear,imonth,iday,fix(strmid(flaretime,0,2))+6,0,0]
+c_a_to_r,flarestime, fstime
+c_a_to_r,flareetime, fetime
+
+reread = 1
+vdate = date_conv(date,'V')
+doy = vdate(1)
+year = vdate(0)
+
+strdate = tostr(year)+tostr(doy)
+
+
+;GOES flux
+
+shortdate =  strmid(tostr(iyear),2,2)+chopr('0'+tostr(imonth),2)
+goesfile = '~/GOES/'+tostr(iyear)+'/data/*'+shortdate+'.TXT'
+nlinesskip = 26
+ngoeslines = file_lines(goesfile)-nlinesskip
+goestime = intarr(6,ngoeslines)
+goesflux = fltarr(2,ngoeslines)
+grtime = fltarr(ngoeslines)
+
+temp = ' '
+openr,1,goesfile
+for i = 0, nlinesskip - 1 do begin
+    readf,1,temp
+endfor
+
+for iline = 0, ngoeslines - 1 do begin
+    readf, 1, temp
+    t = strsplit(temp, /extract)
+    goestime(*,iline) = fix([strmid(t(0),0,2)+2000,strmid(t(0),2,2),strmid(t(0),4,2),$
+                         strmid(t(1),0,2),strmid(t(1),2,2),0])
+    goesflux(*,iline) = t(3:4)
+    c_a_to_r,goestime(*,iline),rt
+    grtime(iline) = rt
+
+endfor
+close,1
+
+svtime = [iyear,imonth,iday,0,0,0]
+nextday = next_day(imonth,iday)
+evtime = [iyear,imonth,nextday,0,0,0]
+c_a_to_r,svtime,stime
+c_a_to_r,evtime,etime
+
+glocs = where(grtime ge fstime and grtime le fetime)
+
+genergy = 0
+
+for itime = 0, n_elements(glocs) - 1 do begin
+    genergy = genergy + (goesflux(0,glocs(itime)) * (grtime(glocs(itime)+1) - $
+                                                     grtime(glocs(itime))))
+endfor
+
+end
+

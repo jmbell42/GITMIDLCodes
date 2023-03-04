@@ -1,0 +1,6 @@
+
+function rms, array
+
+  result = sqrt(mean(array^2))
+
+end

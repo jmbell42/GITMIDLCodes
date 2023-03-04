@@ -1,0 +1,19 @@
+#       Add menu definitions
+# Lines should be comments (#), blank or a class definition
+#
+#       $Id: //depot/idl/IDL_63_RELEASE/idldir/lib/obsolete/widdef.dat#1 $
+
+# Description           Class
+#------------           -----
+"Base"                  BASE
+"Button"                BUTTON
+"Bitmap Button"         BMPBTN
+"Button Group"          BGROUP
+"Draw"                  DRAW
+"Field w/Label"         FIELD
+"Label"                 LABEL
+"List"                  LIST
+"Pull Down Menu"        PDMENU
+"Slider"                SLIDER
+"Floating Pt. Slider"   FSLID
+"Text"                  TEXT

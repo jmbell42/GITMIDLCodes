@@ -1,0 +1,35 @@
+getnewdata = 1
+
+filelist_new = file_search('*out.dat')
+nfiles_new = n_elements(filelist_new)
+
+if n_elements(nfiles) eq 0 then nfiles = 0
+
+if nfiles eq nfiles_new then begin
+    getnewdata = 0 
+    getnewdata = fix(ask("get new data: (0/1) ", tostr(getnewdata)))
+endif
+
+itime = intarr(3,nfiles)
+
+if getnewdata then begin
+    
+    for ifile = 0, nfiles -1 do begin
+        
+        fn = filelist_new(ifile)
+        read_hydro_file, fn, data, nvars, nlons, nlats, nalts, lats, lons, alts
+
+        if ifile eq 0 then alldata = fltaarr(nfiles,nvars,nlons,nlats,nalts)
+
+        alldata(ifile,*,*,*,*) = data
+        
+        len = 0
+        chour = strmid(fn,len,2)
+        cmin = strmid(fn,len+2,2)
+        csec = strmid(fn,len+3,2)
+        itime(*,ifile) = [chour,cmin,csec]
+        
+    endfor
+
+
+endif

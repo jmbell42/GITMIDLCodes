@@ -1,0 +1,65 @@
+reread = 1
+if (n_elements(GitmNe) gt 0) then begin
+    answer = ask('whether to re-read data','n')
+    if (strpos(mklower(answer),'n') gt -1) then reread = 0
+endif
+
+
+if (reread) then begin
+
+    if (n_elements(dir) eq 0) then dir = '.'
+    dir = ask('gitm directory',dir)
+    filelist = file_search(dir+'/*.bin')
+
+    file = filelist(0)
+
+    length = strpos(file,'.bin')
+    ls = length-13
+    
+    yr = strmid(file,ls,2)
+    iYear = tostr(2000+fix(yr))
+    iMonth = strmid(file,ls+2,2)
+    iDay = strmid(file,ls+4,2)
+    
+    raddir = '/data6/Data/Radar/'
+    ndays = 1
+    
+    thermo_readsat, filelist, data, gtime, nTimes, Vars, nAlts, nSats, nfiles
+    c_r_to_a, starr,gtime(0)
+    c_r_to_a, etarr,max(gtime)
+    if etarr(2) - starr(2) gt 0 then begin
+        days = intarr(etarr(2) - starr(2))
+        months = intarr(etarr(2) - starr(2))
+        months(*) = starr(1)
+        for iday = 0, ndays - 1 do begin
+            days(iday) = starr(2)+iday
+        endfor
+    endif else begin
+        ndays = d_in_m(starr(0),starr(1))
+        days = intarr(ndays-starr(2)+etarr(2))
+        nd = n_elements(days)
+        for iday = 0, ndays - 1 do begin
+            if strarr(2) + iday le ndays then begin
+                days(iday) = starr(2) + iday
+                months(iday) = starr(1)
+                idayfin = iday
+            endif else begin
+                days(iday) = iday - idayfin
+                months(iday) = etarr(1)
+            endelse
+        endfor
+    endelse
+
+radfiles = [0]
+    for iday = 0, ndays - 1 do begin
+        rfiles = file_search(raddir+'*'+iyear+imonth+iday+*.'txt')
+        for ifile = 0, nfiles - 1 do begin
+            radfiles = [radfile,rfiles(ifile)]
+        endfor
+    endfor
+    nradfiles = n_elements(radfiles)
+    radfiles = radfiles(1:nradfiles-1)
+
+
+    
+endif

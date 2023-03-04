@@ -1,0 +1,26 @@
+close,1
+openr,1,'cond.dat'
+t = ' '
+readf,1,t
+nalts = float(t)+ 4
+
+alt = fltarr(nalts)
+cond = fltarr(nalts-4)
+temp = fltarr(nalts)
+kappa = fltarr(nalts-2)
+readf,1,alt
+readf,1,cond
+readf,1,temp
+readf,1,kappa
+close,1
+
+condcalc = kappa*deriv(alt(1:nalts-2),deriv(alt(1:nalts-2),temp(1:nalts-2))) + $
+           deriv(alt(1:nalts-2),kappa)*deriv(alt(1:nalts-2),temp(1:nalts-2))
+setdevice,'plot.ps','p',5,.95
+plot,cond,alt(2:nalts-3)/1000.
+oplot,condcalc,alt(1:nalts-2)/1000.,linestyle=2
+closedevice
+
+
+
+end

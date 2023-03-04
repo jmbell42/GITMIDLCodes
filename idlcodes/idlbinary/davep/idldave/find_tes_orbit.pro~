@@ -1,0 +1,22 @@
+tesfile = file_search('~/UpperAtmosphere/TES/TesOrbitInfo.txt')
+if tesfile eq -1 then begin
+   print, 'Cant find TES orbit file'
+   stop
+endif
+
+openr,1,tesfile
+done = 0
+while not done do begin
+   read,1,temp
+   if strpos(temp,'#START') ge 0 and strpos(temp,'MarsYear') lt 0 then begin
+      stop
+   endif
+
+endwhile
+
+
+
+
+
+end
+  

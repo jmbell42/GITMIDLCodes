@@ -1,0 +1,12 @@
+
+pro c_a_to_ymd, iTime, ymd
+
+  iTimeIn = iTime
+
+  c_a_to_r, iTimeIn, rTime
+  c_r_to_a, iTimeIn, rTime
+
+
+
+end
+

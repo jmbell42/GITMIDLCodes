@@ -1,0 +1,303 @@
+
+;;;;----- Grab the GITM files and create multiple time
+;;;;----- Series plots for direct comparison
+
+
+  tidx = 125
+;--- Read in the Conduction Test Data
+  filelist = findfile("../K00/*.bin")
+;  nfiles = n_elements(filelist) 
+  selectfile = filelist[tidx]
+  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+                  nSats, Files
+  K0Alts = reform(data(0,0,2,0:nAlts-1))
+  K0Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+  K0AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+  K0tSimulation = reform(data(0,0:nTimes-1,6,0))
+  K0iStep = reform(data(0,0:nTimes-1,7,0))
+  K0Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+
+  K0Sample = K0Deviation[51]
+  K0SampleTime = K0tSimulation
+;------------
+
+  tidx = 250
+  filelist = findfile("../K01/*.bin")
+  ;nfiles = n_elements(filelist) 
+  selectfile = filelist[tidx]
+  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+                  nSats, Files
+  K1Alts = reform(data(0,0,2,0:nAlts-1))
+  K1Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+  K1AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+  K1Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+  K1tSimulation = reform(data(0,0:nTimes-1,6,0))
+  K1iStep = reform(data(0,0:nTimes-1,7,0))
+
+  K1Sample = K1Deviation[51]
+  K1SampleTime = K1tSimulation
+
+
+;;------------
+  tidx = 500
+  filelist = findfile("../K02/*.bin")
+  ;nfiles = n_elements(filelist) 
+  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+  ;                nSats, Files
+  selectfile = filelist[tidx]
+  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+                  nSats, Files
+  K2Alts = reform(data(0,0,2,0:nAlts-1))
+  K2Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+  K2AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+  K2Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+  K2tSimulation = reform(data(0,0:nTimes-1,6,0))
+  K2iStep = reform(data(0,0:nTimes-1,7,0))
+
+  K2Sample = K2Deviation[51]
+  K2SampleTime = K2tSimulation
+
+
+;;------------
+  tidx = 1000
+  filelist = findfile("../K03/*.bin")
+  ;nfiles = n_elements(filelist) 
+  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+  ;                nSats, Files
+  selectfile = filelist[tidx]
+  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+                  nSats, Files
+  K3Alts = reform(data(0,0,2,0:nAlts-1))
+  K3Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+  K3AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+  K3Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+  K3tSimulation = reform(data(0,0:nTimes-1,6,0))
+  K3iStep = reform(data(0,0:nTimes-1,7,0))
+
+  K3Sample = K3Deviation[51]
+  K3SampleTime = K3tSimulation
+
+
+;;------------
+  filelist = findfile("../K04/*.bin")
+  nfiles = n_elements(filelist) 
+  tidx = floor(nfiles/2.0) + 1
+ ; thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+ ;                 nSats, Files
+  ;selectfile = filelist[tidx]
+  ;thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+  ;                nSats, Files
+  read_thermosphere_file, selectfile,nVars, nAlts, nLats, nLons, $
+            Vars, data, nBLKlat_t, nBLKlon_t, nBLK_t, itime, version
+
+  K4Alts = reform(data(2,0,0,0:nAlts-1))
+  K4Temp  = reform(data(3,0,0,0:nAlts-1))
+  K4AnalyticalTemp  = reform(data(4,0,0,0:nAlts-1))
+  K4Deviation  = reform(data(5,0,0,0:nAlts-1))
+  K4tSimulation = reform(data(6,0,0,0))
+  K4iStep = reform(data(7,0,0,0))
+
+  K4Sample = K4Deviation[51]
+  K4SampleTime = K4tSimulation
+;
+;
+;
+;;;------------
+;  tidx = 25
+;  filelist = findfile("../K05/*.bin")
+;  ;nfiles = n_elements(filelist) 
+;  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+;  ;                nSats, Files
+;  selectfile = filelist[tidx]
+;  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+;                  nSats, Files
+;  K5Alts = reform(data(0,0,2,0:nAlts-1))
+;  K5Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+;  K5AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+;  K5Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+;  K5tSimulation = reform(data(0,0:nTimes-1,6,0))
+;  K5iStep = reform(data(0,0:nTimes-1,7,0))
+;
+;  K5Sample = K5Deviation[51]
+;  K5SampleTime = K5tSimulation
+;
+;
+;
+;;;------------
+;  tidx = 25
+;  filelist = findfile("../K06/*.bin")
+;  ;nfiles = n_elements(filelist) 
+;  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+;  ;                nSats, Files
+;  selectfile = filelist[tidx]
+;  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+;                  nSats, Files
+;  K6Alts = reform(data(0,0,2,0:nAlts-1))
+;  K6Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+;  K6AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+;  K6Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+;  K6tSimulation = reform(data(0,0:nTimes-1,6,0))
+;  K6iStep = reform(data(0,0:nTimes-1,7,0))
+;
+;  K6Sample = K6Deviation[51]
+;  K6SampleTime = K6tSimulation
+;
+;
+;
+;;;------------
+;  tidx = 25
+;  filelist = findfile("../K07/*.bin")
+;  ;nfiles = n_elements(filelist) 
+;  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+;  ;                nSats, Files
+;  selectfile = filelist[tidx]
+;  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+;                  nSats, Files
+;  K7Alts = reform(data(0,0,2,0:nAlts-1))
+;  K7Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+;  K7AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+;  K7Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+;  K7tSimulation = reform(data(0,0:nTimes-1,6,0))
+;  K7iStep = reform(data(0,0:nTimes-1,7,0))
+;
+;  K7Sample = K7Deviation[51]
+;  K7SampleTime = K7tSimulation
+;
+;;------------
+;  tidx = 25
+;  filelist = findfile("../K08/*.bin")
+;  ;nfiles = n_elements(filelist) 
+;  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+;  ;                nSats, Files
+;  selectfile = filelist[tidx]
+;  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+;                  nSats, Files
+;  K8Alts = reform(data(0,0,2,0:nAlts-1))
+;  K8Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+;  K8AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+;  K8Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+;  K8tSimulation = reform(data(0,0:nTimes-1,6,0))
+;  K8iStep = reform(data(0,0:nTimes-1,7,0))
+;
+;  K8Sample = K8Deviation[51]
+;  K8SampleTime = K8tSimulation
+;
+;;;------------
+;  tidx = 25
+;  filelist = findfile("../K09/*.bin")
+;  ;nfiles = n_elements(filelist) 
+;  ;thermo_readsat, filelist, data, time, nTimes, Vars, nAlts,$
+;  ;                nSats, Files
+;  selectfile = filelist[tidx]
+;  thermo_readsat, selectfile, data, time, nTimes, Vars, nAlts,$
+;                  nSats, Files
+;  K9Alts = reform(data(0,0,2,0:nAlts-1))
+;  K9Temp  = reform(data(0,0:nTimes-1,3,0:nAlts-1))
+;  K9AnalyticalTemp  = reform(data(0,0:nTimes-1,4,0:nAlts-1))
+;  K9Deviation  = reform(data(0,0:nTimes-1,5,0:nAlts-1))
+;  K9tSimulation = reform(data(0,0:nTimes-1,6,0))
+;  K9iStep = reform(data(0,0:nTimes-1,7,0))
+;
+;  K9Sample = K9Deviation[51]
+;  K9SampleTime = K9tSimulation
+;
+;  print, 'Selected Times'
+  print, 'K0', K0SampleTime
+  print, 'K1', K1SampleTime
+  print, 'K2', K2SampleTime
+  print, 'K3', K3SampleTime
+;  print, 'K4', K4SampleTime
+;  print, 'K5', K5SampleTime
+;  print, 'K6', K6SampleTime
+;  print, 'K7', K7SampleTime
+;  print, 'K8', K8SampleTime
+;  print, 'K9', K9SampleTime
+
+;==============Filled Circles
+         phi = findgen(32)*(!PI*2/32.)
+         phi = [phi, phi(0)]
+         usersym, cos(phi), sin(phi), /fill 
+;==============Filled Circles
+
+; ------------------------ Begin Making the Plots --------------------------------
+   Errors = fltarr(4)
+   DeltaT = fltarr(4)
+
+   Errors[0] = K0Sample
+   Errors[1] = K1Sample
+   Errors[2] = K2Sample
+   Errors[3] = K3Sample
+;   Errors[4] = K4Sample
+;   Errors[5] = K5Sample
+;   Errors[6] = K6Sample
+;   Errors[7] = K7Sample
+;   Errors[8] = K8Sample
+;   Errors[9] = K9Sample
+;
+   DeltaT[0] = 1.0
+   DeltaT[1] = 1.0/(2^1.0)
+   DeltaT[2] = 1.0/(2^2.0)
+   DeltaT[3] = 1.0/(2^3.0)
+;   DeltaT[4] = 1.0/(2^4.0)
+;   DeltaT[5] = 1.0/(2^5.0)
+;   DeltaT[6] = 1.0/(2^6.0)
+;   DeltaT[7] = 1.0/(2^7.0)
+;   DeltaT[8] = 1.0/(2^8.0)
+;   DeltaT[9] = 1.0/(2^9.0)
+
+
+   ;;; generate a best-fit polynomial
+   PolyCoefs = POLY_FIT(DeltaT, Errors, 1)
+
+   SplineErrors = PolyCoefs[0] + PolyCoefs[1]*DeltaT
+
+  psfile = 'TimeStep_Error_Convergence.eps'
+  cgPS_Open, filename = psfile, /quiet
+
+   cgPlot, DeltaT, Errors, $
+           background = 'white', color = 'black', $
+           xstyle = 1, xrange = [0.0, 1.0], $
+           ystyle = 1, yrange = [0.0, max(Errors)*1.5], $
+           /nodata , charsize = 2.0, $
+           charthick = 4.0, $
+           title = 'Conduction Grid Covergence Test', $
+           xtitle = 'Ratio of Time Step (no units)', $
+           ytitle = 'Error from Analytical ', thick = 4.0
+
+   cgPlot, DeltaT, SplineErrors, /overplot, $
+           thick = 4.0, charsize = 2.0, $
+           symsize = 1.5, color = 'orange', $
+           linestyle = 2
+
+   cgPlot, DeltaT, Errors, /overplot, $
+           thick = 4.0, charsize = 2.0, $
+           symsize = 1.5, color = 'firebrick', psym = 16
+
+    legend1 = textoidl('Model Errors    ')
+    legend2 = textoidl('Linear Fit Errors ')
+    cgLegend, location = [0.15, max(Errors)], $
+              bg_color = 'rose', /box, bx_color = 'black',$
+              /data, charsize = 1.5, charthick = 4.0, $
+              titles = [legend1, legend2],$
+              linestyles = [0,2], colors = ['firebrick', 'orange']
+
+  cgPS_Close
+
+
+  ;;;; Perform a New Analysis
+  NewErrors = fltarr(n_elements(Errors) - 2)
+  NewDeltaT = fltarr(n_elements(Errors) - 2)
+
+  for i = 2, n_elements(Errors) -1 do begin
+      
+      NewErrors[i-2] = abs(Errors[i-1] - Errors[i-2])/abs(Errors[i] - Errors[i-1])
+           NewDeltaT[i-2] = DeltaT[i]
+      print, i,i-1,i-2, NewErrors[i-2]
+  endfor 
+
+
+
+
+
+end
+

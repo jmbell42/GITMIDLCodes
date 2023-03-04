@@ -1,0 +1,10 @@
+filename = '~/UpperAtmosphere/TES/TES.van'
+
+openr,1,filename
+readf,1,temp
+header = strsplit(temp,/extract)
+
+
+
+
+end

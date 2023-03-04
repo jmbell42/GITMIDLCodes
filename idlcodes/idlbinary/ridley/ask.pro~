@@ -1,0 +1,15 @@
+function ask, what, orig_ans, set_orig = set_orig
+
+  if n_elements(orig_ans) eq 0 then orig_ans = ''
+
+  answer = ''
+
+  read, 'Enter '+what+' ['+orig_ans+'] : ', answer
+
+  if strlen(answer) eq 0 then answer = orig_ans
+
+  if n_elements(set_orig) gt 0 then orig_ans = answer
+
+  return, answer
+
+  end

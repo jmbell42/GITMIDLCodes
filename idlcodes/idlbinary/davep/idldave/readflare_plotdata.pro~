@@ -1,0 +1,3 @@
+if n_elements(flarefile) eq 0 then flarefile = ' '
+flarefile = ask('which flare file to plot: ',flarefile)
+

@@ -1,0 +1,8 @@
+
+pro smooth_1d, time, data, dt
+
+
+
+
+
+endpro

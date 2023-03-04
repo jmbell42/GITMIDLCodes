@@ -1,0 +1,11 @@
+.r r_l2cd_hdf
+
+filelist = file_search('CD_*.HDF')
+nfiles = n_elements(filelist)
+
+for ifile = 0, nfiles - 1 do begin
+   fn = filelist(ifile)
+   len = strpos(fn,'.HDF')
+   base = strmid(fn,0,len)
+   file,base
+   

@@ -1,0 +1,7 @@
+iVernalTime = [1998,7,14,16,0,0] ;Vernal Equinox at Midnight (LS = 0)
+daysperyear = 670.0
+rotation_period = 88775.0                 
+hoursperday = rotation_period/3600.0
+
+secondsperyear = daysperyear*rotation_period
+

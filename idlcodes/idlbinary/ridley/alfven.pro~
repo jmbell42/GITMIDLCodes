@@ -1,0 +1,12 @@
+
+if n_elements(speed) eq 0 then speed = 400.0
+if n_elements(density) eq 0 then density = 5.0
+if n_elements(b) eq 0 then b = 5.0
+if n_elements(t) eq 0 then speed = 150000.0
+
+speed   = float(ask('speed',tostrf(speed)))
+density = float(ask('density',tostrf(density)))
+b       = float('b',tostrf(b)))
+t       = float('t',tostrf(t)))
+
+

@@ -1,0 +1,8 @@
+spidr_get_ionostation+year+mon+day+' ,'+year2+mon2+day2+' ,code,name,'+
+                    'coordinates'
+ f.write('openr,1,\'data.txt\'')
+   f.write('for i=0,n_elements(name)-1 do begin')
+   f.write('printf,code(i),name(i),coordinates(*,i)')
+   f.write('endfor')
+   f.write('close,1')
+   f.write('end')

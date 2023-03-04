@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="content-type">
+    <meta content="Mark Hadfield" name="author">
+    <meta content="The Motley IDL Library" name="description">
+    <meta content="text/html" http-equiv="content-type">
+    <title>The Motley IDL Library</title></head>
+<body>
+    <h1>
+      The Motley IDL Library
+    </h1>
+    <p>
+      <a href="mailto:m.hadfield@niwa.co.nz%20%28Mark%20Hadfield%29">Mark Hadfield</a>
+    </p>
+    <p>
+      Motley is a library of <a href="http://www.rsinc.com/idl/">IDL</a> code written largely
+      by me at <a href="http://www.niwa.co.nz/">NIWA</a>. It is provided to the IDL community
+      subject to the following conditions:
+    </p>
+    <ol>
+      <li>
+        NIWA makes no representations or warranties regarding the accuracy of the software, the
+        use to which the software may be put or the results to be obtained from the use of the
+        software. Accordingly NIWA accepts no liability for any loss or damage (whether direct
+        of indirect) incurred by any person through the use of or reliance on the software.
+      </li>
+      <li>
+        NIWA is to be acknowledged as the original author of the software where the software is
+        used or presented in any form.
+      </li>
+    </ol>
+    <p>
+      The library is a collection of the routines that I use regularly and that I think might
+      be of interest to others. There are several Object Graphics classes, a base class for
+      widget applications and several applications built on it, functions that make it easy to
+      represent scaled data on axes, classes for accessing netCDF files and several utility
+      routines. You will notice that the names begin with my initials, MGH. This is not egotism
+      (well, OK, just a little) but an attempt to avoid naming conflicts with other software
+      collections.
+    </p>
+    <p>
+      This version of the library requires <em>IDL 6.4</em>. It has been developed &amp; tested
+      on Windows XP, and also tested (some time ago now) on a Linux system. If it
+      doesn&#8217;t work on your platform, I&#8217;d love to hear about it.
+    </p>
+    <p>
+      I have made no effort to keep the routines in Motley independent of each other, so if you
+      want to use one you're advised to install the lot. The procedure is:
+    </p>
+    <ol>
+      <li>
+        Download the library in <a href="motley.zip">.zip</a> or <a href="motley.tar.gz">.tar.gz</a> format.
+      </li>
+      <li>
+        Unpack the files to a directory and add it to your IDL path.
+      </li>
+      <li>
+        Before using any of the routines in the library in any IDL session, run the
+        initialisation routine with the command "mgh_motley". You may eventually want
+        to add this command to your startup script.
+      </li>
+    </ol>
+    <p>
+      Generally the Motley library does not require any routines outside the standard IDL
+      library. Occasionally I make exceptions; in this case my policy is to bundle a copy of
+      the required routine, with permission of the author. I try to keep these bundled routines
+      up to date, but you may want to check the author&#8217;s WWW site for a more recent copy.
+      Currently the bundled routines are:
+    </p>
+    <ul>
+      <li>
+        IMDISP by <a href="http://www.gumley.com/">Liam Gumley</a>, used in an example program.
+      </li>
+      <li>
+        CMUNIQUE_ID by <a href="http://astrog.physics.wisc.edu/%7Ecraigm/idl/idl.html">Craig
+        Markwardt</a>.</li></ul><p>When used on Windows the library can make use of Oleg Kornilov&#8217;s <a href="http://www.rsinc.com/codebank/search.asp?FID=139&amp;WID=3,486">AVI DLL</a>
+to generate AVI files. A copy of the DLL should be placed in the same
+directory as the rest of the Motley library. The rest of Oleg&#8217;s code is
+not used. </p>
+    <p>
+      Finally, the library includes a modified form of RSI&#8217;s CW_PALETTE_EDITOR. The
+      modified routine is called MGH_CW_PALETTE_EDITOR and is included with permission of RSI,
+      who retain copyright. For a list of the modifications, see the modified source code.
+    </p>
+    <hr size="3">
+    <a href="mailto:m.hadfield@niwa.co.nz%20%28Mark%20Hadfield%29">Mark Hadfield</a> 2009-06-24
+  </body></html>

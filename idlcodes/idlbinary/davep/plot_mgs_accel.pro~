@@ -1,0 +1,65 @@
+if n_elements(date eq 0) then date = ' '
+date = ask('which date to plot (yyyymmdd): ',date)
+
+cyear = strmid(date,0,4)
+cmon = strmid(date,4,2)
+cday = strmid(date,6,2)
+
+
+mgsdir = '~/UpperAtmosphere/MGS/Accel/'
+files = filesearch(mgsdir+'P*')
+nfiles_new = nellements(files)
+if n_elements(nfiles) eq 0 then nfiles = -99
+if nfiles_new eq nfiles then begin
+   getnewdata = 'n'
+   getnewdata = ask('whether to get new data ',getnewdata)
+   if strpos( getnewdata,'y') ge 0 then getnewdata = 1 else getnewdata=0
+endif
+nfiles = nfiles_new
+
+t=' '
+if getnewdata then begin
+   for ifile = 0, nfiles - 1 do begin
+      openr,3,files(ifile)
+      finished = 0
+      foundstart = 0
+      foundend = 0
+      while not finished do begin
+         readf,3,t
+         if strpos(t,"START_TIME") ge 0 then begin
+            finished = 1
+            if not foundstart then begin
+               temp = strsplit(t,/extract)
+               fileyear = strmid(temp(2),0,4))
+               filemonth = strmid(temp(2),5,2))
+               fileday = strmid(temp(2),8,2))
+               
+               if fileyear+filemonth+fileday eq date then begin
+                  foundstart = 1
+                  ifilestart = ifile
+               endif
+            endif
+            if foundstart and not foundend then begin
+               readf,3,t
+               temp = strsplit(t,/extract)
+               fileyear = strmid(temp(2),0,4))
+               filemonth = strmid(temp(2),5,2))
+               fileday = strmid(temp(2),8,2))
+               
+               if fileyear+filemonth+fileday ne date then begin
+                  foundend = 1
+                  ifileend = ifile
+               endif
+            endif
+         endif
+      endwhile
+   endfor
+endif
+
+;filesuse = files(ifilestart:ifileend)
+;nfilesuse = n_elements(filesuse)
+
+
+
+
+end

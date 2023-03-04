@@ -1,0 +1,3 @@
+
+read_amie_binary, amie_file, data, lats, mlts, time, fields, 	$
+  imf, ae, dst, hp, cpcp, version

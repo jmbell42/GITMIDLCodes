@@ -1,0 +1,40 @@
+filelist = file_search('3DALL*')
+nfiles = n_elements(filelist)
+
+
+for ifile = 0, nfiles - 1 do begin
+
+   
+   fn = filelist(ifile)
+   print, 'Reading file: ',fn
+   read_thermosphere_file, fn, nvars, nalts, nlats, nlons, $
+                           vars, data, rb, cb, bl_cnt
+
+   alt = reform(data(2,*,*,*)) / 1000.0
+   lat = reform(data(1,*,*,*)) / !dtor
+   lon = reform(data(0,*,*,*)) / !dtor
+   
+   l = 7
+   year = strmid(filename,l, 2))
+   mont = strmid(filename,l+2, 2))
+   day  = strmid(filename,l+4, 2))
+   hour = strmid(filename, l+7, 2))
+   minu = strmid(filename,l+9, 2))
+   seco = strmid(filename,l+11, 2))
+
+     
+   if year lt 50 then iyear = year + 2000 else iyear = year + 1900
+
+   filename = 'NO_'+year+mont+day+'_'+hour+minu+seco+'.bin'
+
+   openw,1,filename
+   printf,'#NO density and vertical velocity at 100km'
+   printf,'#Longitude(deg)   Latitude(deg)  [NO](1/m^3) [NO]_120 V_NO(m/s)
+;   for ilon = 2, nlons - 3 do begin
+;      for ilat = 2, nlats - 3 do begin
+;         printf, lon(ilon,ilat
+
+stop
+endfor
+
+end,
